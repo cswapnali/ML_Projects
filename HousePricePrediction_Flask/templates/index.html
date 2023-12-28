@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>House Price Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="location">Location:</label>
+        <select name="location" id="location">
+            <option value="" disabled selected>Choose the location</option>
+            <option value="Bommanahalli">Bommanahalli</option>
+            <option value="Whitefield">Whitefield</option>
+        </select><br>
+
+        <label for="bhk">BHK:</label>
+        <input type="number" name="bhk" id="bhk" placeholder="Ex. 3" required><br>
+
+        <label for="furnishing">Furnishing (0 for unfurnished, 1 for furnished):</label>
+        <input type="number" name="furnishing" id="furnishing" placeholder="0 or 1" required><br>
+
+        <label for="sqft">Sq.ft:</label>
+        <input type="number" name="sqft" id="sqft" placeholder="5000" required><br>
+
+        <label for="old_years">Old (years):</label>
+        <input type="number" name="old_years" id="old_years" placeholder="Ex. 1" required><br>
+
+        <label for="floor">Floor:</label>
+        <input type="number" name="floor" id="floor" placeholder="Ex. 2" required><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        <p>Predicted Price: ${{ "{:.2f}".format(prediction) }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
