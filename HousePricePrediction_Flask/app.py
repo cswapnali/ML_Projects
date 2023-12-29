@@ -20,7 +20,6 @@ y = df['Price']
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
-# model = LinearRegression()
 model = RandomForestRegressor(random_state=42)
 model.fit(X, y)
 
